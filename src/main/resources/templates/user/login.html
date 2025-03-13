@@ -1,0 +1,24 @@
+<html lang="ko" 
+    xmlns:th="http://www.thymeleaf.org" 
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/default}">
+        
+		<section layout:fragment="contents">
+			<contents class="d-flex justify-content-center align-items-center mt-4">
+				<div class="user-box mt-4">
+						<img class="contentsIcon" alt="별인데 내가원하지 않던 별" src="https://cdn.pixabay.com/photo/2016/03/31/17/33/icons-1293736_1280.png"></img>
+					<div class="mt-4">
+						<label>Id</label>
+						<input type="text" class="form-control" placeholder="아이디를 입력하세요">
+						<label>Password</label>
+						<input type="password" class="form-control" placeholder="비밀번호를 입력하세요">
+						<button class="btn btn-block btn-dark mt-3" type="button">로그인</button>
+					</div>
+				</div>
+			</contents>
+		</section>
+		<footer class="d-flex justify-content-center align-items-center">
+			<div>Copyright 2025. Ryu Co. Ltd. all rights reserved.</div>
+		</footer>
+
+</html>

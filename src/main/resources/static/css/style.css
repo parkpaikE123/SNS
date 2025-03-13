@@ -1,0 +1,43 @@
+@charset "UTF-8";
+#wrap {
+	width:1200px;
+	height:800px;
+	margin:0 auto;
+}
+
+header {
+	height:90px;
+	background-color:#FE99F3;
+}
+
+header > .headerIcon {
+	height:80px;
+	
+}
+
+section {
+	height:600px;
+}
+
+section > .join-box {
+	width:500px;
+	height:400px;
+}
+
+section > contents {
+	height:500px;
+}
+
+contents > .user-box {
+	height:480px;
+	width:600px;
+}
+
+contents > .user-box > .contentsIcon {
+	height: 100px;
+}
+
+footer {
+	height:80px;
+	background-color:#FE99F3;
+}
