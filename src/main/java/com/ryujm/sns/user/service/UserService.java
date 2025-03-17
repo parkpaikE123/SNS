@@ -14,7 +14,8 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 	
-	public boolean addUser(String loginId
+	public boolean addUser(
+			String loginId
 			, String password
 			, String name
 			, String email) {

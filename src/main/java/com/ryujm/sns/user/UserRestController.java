@@ -25,10 +25,11 @@ public class UserRestController {
 	
 	// 회원가입 API
 	@PostMapping("/join")
-	public Map<String, String> join(@RequestParam("loginId") String loginId
-					,@RequestParam("password")  String password
-					, @RequestParam("name") String name
-					, @RequestParam("email") String email) {
+	public Map<String, String> join(
+					@RequestParam String loginId
+					,@RequestParam String password
+					, @RequestParam String name
+					, @RequestParam String email) {
 		
 		Map<String, String> resultMap = new HashMap<>();
 		
