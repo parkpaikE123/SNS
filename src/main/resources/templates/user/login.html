@@ -1,20 +1,66 @@
 <html lang="ko" 
     xmlns:th="http://www.thymeleaf.org" 
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/default}">
+        layout:decorate="~{layout/noheader}">
         
 		<section layout:fragment="contents">
 			<contents class="d-flex justify-content-center align-items-center mt-4 ">
 				<div class="user-box mt-4 ">
-						<img class="contentsIcon" alt="별인데 내가원하지 않던 별" src="https://cdn.pixabay.com/photo/2016/03/31/17/33/icons-1293736_1280.png"></img>
+						<div class="d-flex justify-content-center align-items-center">
+							<img width=150px class="contentsIcon" alt="별인데 내가원하지 않던 별" src="https://cdn.pixabay.com/photo/2016/03/31/17/33/icons-1293736_1280.png"></img>
+						</div>
+						<h2 class="text-center">pinkstar</h2>
 					<div class="mt-4">
-						<label>Id</label>
-						<input type="text" class="form-control" placeholder="아이디를 입력하세요">
-						<label>Password</label>
-						<input type="password" class="form-control" placeholder="비밀번호를 입력하세요">
-						<button class="btn btn-block btn-dark mt-3" type="button">로그인</button>
+						<form id="loginForm">
+							<input type="text" class="form-control mb-4" placeholder="아이디" id="idInput">
+							<input type="password" class="form-control" placeholder="비밀번호" id="passwordInput">
+							<button class="btn btn-block btn-dark mt-3" type="submit" id="loginBtn">로그인</button>
+						</form>
 					</div>
 				</div>
 			</contents>
 		</section>
+		
+		<script layout:fragment="script">
+			$(function() {
+				
+				$("#loginForm").on("submit", function(e) {
+					
+					e.preventDefault();
+					
+					let id = $("#idInput").val();
+					let password = $("#passwordInput").val();
+					
+					if(id == "") {
+						alert("아이디를 입력하세요");
+						return;
+					}
+					if(password == "") {
+						alert("비밀번호를 입력하세요");
+						return;
+					}
+					
+					console.log("아이디 : " + id + "비밀번호 : " + password);
+					
+					$.ajax({
+						type:"post"
+						, url:"/uesr/login"
+						, data:{"loginId":id, "password":password}
+						, success:function(response) {
+							if(response.result == "success") {
+								location.href = "/post/list-view";
+							} else {
+								alert("아이디 패스워들 확인하세요");
+							}
+						}
+						, error:function() {
+							alert("로그인 에러");
+						}
+					});
+					
+					
+				});
+			});
+		</script>
+		
 </html>

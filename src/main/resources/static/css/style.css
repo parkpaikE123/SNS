@@ -24,6 +24,10 @@ section > .join-box {
 	height:400px;
 }
 
+.join-box > .btn-box {
+	display: block;
+}
+
 section > contents {
 	height:500px;
 }
