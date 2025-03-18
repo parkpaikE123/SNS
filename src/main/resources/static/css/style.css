@@ -28,6 +28,10 @@ section > .join-box {
 	display: block;
 }
 
+.join-box > .choiceBtn {
+	button-color:#FE99F3;
+}
+
 section > contents {
 	height:500px;
 }
