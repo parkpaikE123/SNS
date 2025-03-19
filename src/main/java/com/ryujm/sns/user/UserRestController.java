@@ -25,7 +25,6 @@ public class UserRestController {
 		this.userService = userService;
 	}
 	
-	
 	// 회원가입 API
 	@PostMapping("/join")
 	public Map<String, String> join(
@@ -46,6 +45,7 @@ public class UserRestController {
 		
 	}
 	
+	// 중복 체크 API
 	@GetMapping("/duplicate-id")
 	public Map<String, Boolean> isDuplicateId(@RequestParam String loginId) {
 		

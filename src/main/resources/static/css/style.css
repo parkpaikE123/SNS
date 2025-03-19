@@ -7,7 +7,7 @@
 
 header {
 	height:90px;
-	background-color:#FE99F3;
+	background-color:rgb(255, 225, 252);
 }
 
 header > .headerIcon {
@@ -23,18 +23,47 @@ section > .join-box {
 	width:500px;
 	height:400px;
 }
+.join-box > .join-input {
+	margin-top : 2px;
+}
 
 .join-box > .btn-box {
 	display: block;
 }
 
 .join-box > .choiceBtn {
-	button-color:#FE99F3;
+	color:#FE99F3;
+}
+
+hr {
+	width:100%;
+	height:2px;
+	background-color:pink;
+}
+
+.hr-dotted {
+	border : 0px;
+	border-top: 5px dotted #663399;
 }
 
 section > contents {
 	height:500px;
 }
+
+section > .feed-view {
+	width:1000px;
+	height:550px;
+	background-color:#2111;
+}
+
+article {
+	height:230px;
+}
+
+like-count {
+	height:100px;
+}
+
 
 contents > .user-box {
 	height:480px;
@@ -47,5 +76,5 @@ contents > .user-box > .contentsIcon {
 
 footer {
 	height:80px;
-	background-color:#FE99F3;
+	background-color:rgb(255, 225, 252);
 }
