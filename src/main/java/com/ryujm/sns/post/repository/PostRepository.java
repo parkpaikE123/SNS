@@ -1,8 +1,9 @@
 package com.ryujm.sns.post.repository;
 
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Mapper
-public interface PostRepository {
+import com.ryujm.sns.post.domain.Post;
+
+public interface PostRepository extends JpaRepository<Post, Integer>{
 
 }

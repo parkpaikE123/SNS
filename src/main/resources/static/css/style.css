@@ -5,6 +5,22 @@
 	margin:0 auto;
 }
 
+.create-page {
+	width:1000px;
+	height:500px;
+}
+
+.top {
+	width:1000px;
+	height:250px;
+}
+
+
+.bottom {
+	width:1000px;
+	height:250px;
+}
+
 header {
 	height:90px;
 	background-color:rgb(255, 225, 252);
@@ -19,12 +35,9 @@ section {
 	height:600px;
 }
 
-section > .join-box {
+.join-box {
 	width:500px;
-	height:400px;
-}
-.join-box > .join-input {
-	margin-top : 2px;
+	background-color:pink;
 }
 
 .join-box > .btn-box {
@@ -32,13 +45,12 @@ section > .join-box {
 }
 
 .join-box > .choiceBtn {
-	color:#FE99F3;
+	color:#febef8;
 }
 
 hr {
 	width:100%;
-	height:2px;
-	background-color:pink;
+	height:1px;
 }
 
 .hr-dotted {
@@ -52,7 +64,6 @@ section > contents {
 
 section > .feed-view {
 	width:1000px;
-	height:550px;
 	background-color:#2111;
 }
 
@@ -60,10 +71,18 @@ article {
 	height:230px;
 }
 
-like-count {
-	height:100px;
+.like-zone {
+	height:50px;
 }
 
+comment-user-name {
+	font-size:20px;
+	font-weight:bold;
+}
+
+comment-detail {
+	font-size:12px;
+}
 
 contents > .user-box {
 	height:480px;
@@ -74,7 +93,29 @@ contents > .user-box > .contentsIcon {
 	height: 100px;
 }
 
-footer {
-	height:80px;
+#wrap > footer {
+	margin-top:30px;
+	height:70px;
 	background-color:rgb(255, 225, 252);
 }
+
+.inputImage {
+	font-size:40px;
+}
+
+.option-btn {
+	width:450px;
+}
+
+.no-border {
+	border-width:0;
+}
+
+.final-button {
+	background-color:#fde093;
+}
+
+.header-star {
+	font-size:50px;
+}
+

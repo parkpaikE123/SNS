@@ -1,0 +1,49 @@
+<html lang="ko" 
+    xmlns:th="http://www.thymeleaf.org" 
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/default}">
+        
+        <section layout:fragment="contents" class="d-flex justify-content-center">
+        	<div class="create-page mb-4 mt-3">
+        		<div class="top">
+        			<div class="d-flex justify-content-center align-items-center">
+	        			<button type="button" class="mt-4"><i class="btn inputImage bi bi-file-earmark-image" id="imageInput"></i></button>
+	        			<div>
+		        			<input type="file" class="mt-2 btn form-control d-none" id="fileInput">
+		        			<br>
+		        			<span class="ml-2">사진을 첨부해주세요</span>
+	        			</div>
+        			</div>
+        		</div>
+        		<hr>
+        		<input type="text" class="no-border form-control" placeholder="문구 추가..">
+        		<hr>
+        		<div class="bottom">
+        			<button class="btn my-3 option-btn btn-light form-control">
+        				<i class="bi bi-person-circle"></i>사람 태그
+        			</button> 
+        			<br>
+        			<button class="btn my-3 option-btn btn-light form-control">
+        				<i class="bi bi-geo-alt"></i>위치 추가
+        			</button> 
+        			<br>
+        			<button class="btn my-3 option-btn btn-light form-control">
+        				<i class="bi bi-music-note-beamed"></i>음악 추가
+        			</button> 
+        			<br>
+        			<button type="button" class="btn final-button form-control mb-2 text-dark">
+        				<i class="bi bi-star text-dark"></i>게시하기
+        			</button>
+        		</div>
+        	</div>
+        </section>
+        
+        <script layout:fragment="script">
+        	$(function() {
+        		$("#imageInput").on("click", function() {
+        			$("#fileInput").click();
+        		});
+        	})
+        </script>
+        
+</html>

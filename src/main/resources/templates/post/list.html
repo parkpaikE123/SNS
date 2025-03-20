@@ -7,15 +7,31 @@
 		<section layout:fragment="contents" class="d-flex justify-content-center align-items-center">
 				<div class="feed-view">
 					<top class="d-flex justify-content-between">
-						<span class="display-4">유저이름</span>
-						<button type="button" class="small btn btn-danger">삭제버튼 자리</button>
+						<span class="display-4 p-2">유저이름</span>
+						<button type="button" class="small btn btn-danger p-2 mx-4 my-4">삭제버튼 자리</button>
 					</top>
 					<hr class="hr-dotted">
 					<article class="bg-dark text-white">게시글 사진 표출 자리</article>
-					<div class="bg-danger">좋아요 표시 자리</div>
+					<div class="ml-2">
+						<h2>wjdals2285</h2>
+						<div class="d-flex align-items-center">
+							<div class="like-zone"><i class="bi bi-heart text-danger"></i></div>
+						</div>
+						<post-detail>게시글 문구공간</post-detail>
+					</div>
 					<hr class="hr-dotted">
-					<information></information>
-					<comment></comment>
+					<comment>
+						<add-comment class="d-flex ml-2">
+							<input type="text" class="form-control mr-2" placeholder="댓글을 남겨보세요">
+							<button type="button" class="btn btn-dark col-2">댓글 남기기</button>
+						</add-comment>
+						<comment-list class="ml-2">
+							<last-comment>
+								<comment-user-name class="mr-1" >댓근남긴 유저의 아이디</comment-user-name>
+								<comment-detail>작성되있는 댓글 자리</comment-detail>
+							</last-comment>
+						</comment-list>
+					</comment>
 				</div>
 		</section>
         
