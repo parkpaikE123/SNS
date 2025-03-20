@@ -45,7 +45,7 @@
 				$("#duplicateText").addClass("d-none");
 			});
 			
-			
+			// 중복 체크 기능
 			$("#isDuplicateBtn").on("click", function() {
 				
 				let loginId = $("#loginIdInput").val();
@@ -58,7 +58,7 @@
 				$.ajax({
 					type:"get"
 					, url:"/user/duplicate-id"
-					, data:{"loginId":id}
+					, data:{"loginId":loginId}
 					, success:function(response) {
 						
 						isDuplicateCheck = true;

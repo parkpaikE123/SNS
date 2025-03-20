@@ -32,6 +32,7 @@ public class UserService {
 		
 	}
 	
+	// 중복체크
 	public boolean isDuplicateId(String loginId) {
 		
 		int count = userRepository.selectCountByLoginId(loginId);
@@ -43,6 +44,13 @@ public class UserService {
 		}
 		
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	public User getUser(String loginId, String password) {
 		
