@@ -16,7 +16,7 @@
         			</div>
         		</div>
         		<hr>
-        		<input type="text" class="no-border form-control" placeholder="문구 추가..">
+        		<input type="text" class="no-border form-control" placeholder="문구 추가.." id="contentsInput">
         		<hr>
         		<div class="bottom">
         			<button class="btn my-3 option-btn btn-light form-control">
@@ -40,8 +40,12 @@
         
         <script layout:fragment="script">
         	$(function() {
-        		$("#imageInput").on("click", function() {
-        			$("#fileInput").click();
+        		$(".final-button").on("click", function() {
+        			
+        			let contents = $("#contentsInput").val();
+        			
+        			let file = $("fileInput")[0].files[0];
+        			
         		});
         	})
         </script>

@@ -5,12 +5,16 @@ import java.util.List;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.ryujm.sns.common.FileManager;
 import com.ryujm.sns.post.domain.Post;
 import com.ryujm.sns.post.dto.CardView;
 import com.ryujm.sns.post.repository.PostRepository;
 import com.ryujm.sns.user.domain.User;
 import com.ryujm.sns.user.service.UserService;
+
+import jakarta.persistence.PersistenceException;
 
 @Service
 public class PostService {
@@ -47,5 +51,34 @@ public class PostService {
 		return cardList;
 		
 	}
+	
+	public boolean addPost(int userId
+				,String contents
+				, MultipartFile imageFile
+				, int memberId
+				, String location
+				, MultipartFile musicFile) {
+		String imagePath = FileManager.saveFile(userId, imageFile);
+		String musicPath = FileManager.saveFile(userId, musicFile);
+		
+		Post post = Post.builder()
+		.contents(contents)
+		.imagePath(imagePath)
+		.userId(userId)
+		.tagMemberId(memberId)
+		.musicPath(musicPath)
+		.build();
+		
+		try {
+			postRepository.save(post);
+			
+		} catch (PersistenceException e) {
+			return false;
+		}
+		
+		return true;
+		
+	}
+	
 	
 }

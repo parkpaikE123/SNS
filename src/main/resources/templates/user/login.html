@@ -48,7 +48,7 @@
 						, data:{"loginId":loginId,"password":password}
 						, success:function(response) {
 							if(response.result == "success") {
-								location.href="/post/list-view";
+								location.href=("/post/list-view");
 							} else {
 								alert("아이디 패스워들 확인하세요");
 							}
