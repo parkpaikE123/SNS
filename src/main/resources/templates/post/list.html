@@ -5,19 +5,21 @@
         layout:decorate="~{layout/default}">
         
 		<section layout:fragment="contents" class="d-flex justify-content-center align-items-center">
-				<div class="feed-view">
+				<div class="feed-view" th:each="card:${cardList}">
 					<top class="d-flex justify-content-between">
-						<span class="display-4 p-2">유저이름</span>
+						<span th:text="${card.loginId}" class="display-4 p-2">유저이름</span>
 						<button type="button" class="small btn btn-danger p-2 mx-4 my-4">삭제버튼 자리</button>
 					</top>
 					<hr class="hr-dotted">
-					<article class="bg-dark text-white">게시글 사진 표출 자리</article>
+					<article class="bg-dark text-white">
+						<img class="w-100" th:src="${card.imagePath}" src="">게시글 사진 표출 자리
+					</article>
 					<div class="ml-2">
-						<h2>wjdals2285</h2>
+						<h2 th:text="${card.loginId}">wjdals2285</h2>
 						<div class="d-flex align-items-center">
 							<div class="like-zone"><i class="bi bi-heart text-danger"></i></div>
 						</div>
-						<post-detail>게시글 문구공간</post-detail>
+						<post-detail th:text="${card.contents}">게시글 문구공간</post-detail>
 					</div>
 					<hr class="hr-dotted">
 					<comment>
