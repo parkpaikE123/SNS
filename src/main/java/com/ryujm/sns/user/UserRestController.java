@@ -62,7 +62,6 @@ public class UserRestController {
 		return resultMap;
 	}
 	
-	
 	// 로그인 API
 //	 한번 로그인된 클라이언트의 정보는 session 에서 관리
 	@PostMapping("/login")
@@ -77,8 +76,8 @@ public class UserRestController {
 			session.setAttribute("userId", user.getId());
 			session.setAttribute("userLoginId", user.getLoginId());
 			
-			
 			resultMap.put("result", "success");
+			
 		}else {
 			resultMap.put("result", "fail");
 		}

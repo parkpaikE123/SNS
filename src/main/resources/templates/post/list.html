@@ -17,7 +17,9 @@
 					<div class="ml-2">
 						<h2 th:text="${card.loginId}">wjdals2285</h2>
 						<div class="d-flex align-items-center">
-							<div class="like-zone"><i class="bi bi-heart text-danger"></i></div>
+							<div class="like-zone">
+								<i class="bi bi-heart text-danger like-btn" th:data-post-id="${card.postId}" id="likeBtn"></i>
+							</div>
 						</div>
 						<post-detail th:text="${card.contents}">게시글 문구공간</post-detail>
 					</div>
@@ -36,5 +38,35 @@
 					</comment>
 				</div>
 		</section>
+		
+		<script layout:fragment="script">
+			$(function() {
+				$(".like-btn").on("click", function() {
+					
+					let postId = $(this).data("post-id");
+					
+					$.ajax({
+						type:"post"
+						, url:"/post/like"
+						, data:{"postId":postId}
+						, success:function(response) {
+							if(response.result == "success") {
+								location.reload();
+							} else {
+								alert("좋아요 실패");
+							}
+						}
+						, error:function() {
+							alert("좋아요 에러");
+						}
+					});
+				});
+				
+				$("#uplaodBtn").on("click", function() {
+					
+				});
+				
+			})
+		</script>
         
 </html>

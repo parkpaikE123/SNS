@@ -2,14 +2,20 @@
 		<div>
 		
 			<div class="d-flex justify-content-center">
-				<i style="color :#f463f8" class="header-star bi bi-star-fill"></i>
+				<i style="color :#f463f8" class="header-star bi bi-star-fill btn" id="logo-btn"></i>
 			</div>
 			
 			<div class="mr-4" th:if="${session.userId != null}">
 				<span th:text="${session.userLoginId}">star</span><a href="/user/logout">로그아웃</a>
 			</div>
 			
-			
 		</div>
 		<hr>
 	</header>
+	<script layaout:fragment="script">
+		$(function() {
+			$("#logo-btn").on("click", function() {
+				location.href("/post-list-view");
+			})
+		})
+	</script>

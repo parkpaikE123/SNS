@@ -1,11 +1,9 @@
-package com.ryujm.sns.post.domain;
+package com.ryujm.sns.like.domain;
 
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,42 +14,22 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name="`post`")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Table(name="`like`")
 @Entity
-public class Post {
-	
+public class Like {
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="userId")
 	private int userId;
-	
-	@Column(name="imagePath")
-	private String imagePath;
-	
-	@Column(name="contents")
-	private String contents;
-	
-	@Column(name="locationPath")
-	private String locationPath;
-	
-	@Column(name="musicPath")
-	private String musicPath;
-	
-	@Column(name="tagMemberId")
-	private int tagMemberId;
+	private int postId;
 	
 	@CreationTimestamp
-	@Column(name="createdAt")
-	private LocalDateTime createdAt;
-	
-	@UpdateTimestamp
 	private LocalDateTime updatedAt;
-	
 	
 }
