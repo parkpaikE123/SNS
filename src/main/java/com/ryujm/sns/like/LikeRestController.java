@@ -20,7 +20,6 @@ public class LikeRestController {
 		this.likeService = likeService;
 	} 
 	
-	
 	@PostMapping("/post/like")
 	public Map<String, String> like(
 			@RequestParam int postId

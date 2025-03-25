@@ -1,5 +1,9 @@
 package com.ryujm.sns.post.dto;
 
+import java.util.List;
+
+import com.ryujm.sns.post.comment.domain.Comment;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -12,10 +16,15 @@ public class CardView {
 
 	private int postId;
 	
+	private int likeCount;
 	private String contents;
 	private String imagePath;
 	
 	private int userId;
 	private String loginId;
 	
+	// 로그인한 사용자의 좋아요 여분
+	private boolean isLike;
+	// 댓글 목록
+	private List<Comment> commentList;
 }

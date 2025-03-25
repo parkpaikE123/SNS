@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ryujm.sns.common.FileManager;
-import com.ryujm.sns.post.domain.Member;
+import com.ryujm.sns.like.service.LikeService;
 import com.ryujm.sns.post.domain.Post;
 import com.ryujm.sns.post.dto.CardView;
 import com.ryujm.sns.post.repository.PostRepository;
@@ -22,11 +22,13 @@ public class PostService {
 	
 	private final PostRepository postRepository;
 	
-	private UserService userService;
+	private final UserService userService;
+	private final LikeService likeService;
 	
-	public PostService(PostRepository postRepository, UserService userService) {
+	public PostService(PostRepository postRepository, UserService userService, LikeService likeService) {
 		this.postRepository = postRepository;
 		this.userService = userService;
+		this.likeService = likeService;
 	}
 	
 	
@@ -39,12 +41,15 @@ public class PostService {
 			
 			User user = userService.getUserById(post.getUserId());
 			
+			int likeCount = likeService.getLikeCount(post.getId());
+			
 			CardView cardView = CardView.builder()
 			.postId(post.getId())
 			.contents(post.getContents())
 			.imagePath(post.getImagePath())
 			.userId(post.getUserId())
 			.loginId(user.getLoginId())
+			.likeCount(likeCount)
 			.build();
 			
 			cardList.add(cardView);
