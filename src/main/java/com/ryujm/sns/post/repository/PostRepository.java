@@ -6,4 +6,5 @@ import com.ryujm.sns.post.domain.Post;
 
 public interface PostRepository extends JpaRepository<Post, Integer>{
 
+	
 }

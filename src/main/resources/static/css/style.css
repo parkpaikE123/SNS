@@ -72,7 +72,8 @@ section > .feed-view {
 }
 
 article {
-	height:230px;
+	width:400px;
+	height:200px;
 }
 
 .like-zone {

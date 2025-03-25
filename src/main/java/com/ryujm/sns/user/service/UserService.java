@@ -1,5 +1,8 @@
 package com.ryujm.sns.user.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.ryujm.sns.common.MD5HashingEncoder;
@@ -45,6 +48,12 @@ public class UserService {
 		
 	}
 	
+	public List<User> getAllUser() {
+		List<User> nameList = new ArrayList<>();
+		nameList.add(userRepository.selectUserLoginId());
+		
+		return nameList;
+	}
 	
 	public User getUser(String loginId, String password) {
 		

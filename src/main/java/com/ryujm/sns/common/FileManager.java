@@ -56,7 +56,7 @@ public class FileManager {
 		}
 		
 		// 실제 파일 저장 위치와 url 경로를 매칭하는 규칙
-		// D:\\jung20241114\\project\\upload\\memo
+		// D:\\jung20241114\\project\\upload\\sns
 		// /images/
 		
 		// D:\\jung20241114\\project\\upload\\memo/5_1432352/test.png

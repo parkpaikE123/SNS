@@ -47,7 +47,6 @@ public class Post {
 	private int tagMemberId;
 	
 	@CreationTimestamp
-	@Column(name="createdAt")
 	private LocalDateTime createdAt;
 	
 	@UpdateTimestamp

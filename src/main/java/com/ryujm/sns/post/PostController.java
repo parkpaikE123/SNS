@@ -1,6 +1,5 @@
 package com.ryujm.sns.post;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -21,6 +20,11 @@ public class PostController {
 		this.postService = postService;
 	}
 	
+	@GetMapping("/add-member")
+	public String addMember() {
+		return"/user/selectmember";
+	}
+	
 	@GetMapping("/list-view")
 	public String list(Model model) {
 		
@@ -35,5 +39,11 @@ public class PostController {
 	public String createList() {
 		return "/post/create";
 	}
+	
+	@GetMapping("/delete")
+	public void deleteList() {
+		
+	}
+	
 	
 }

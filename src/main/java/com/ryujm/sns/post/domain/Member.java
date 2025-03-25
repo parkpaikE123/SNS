@@ -1,4 +1,4 @@
-package com.ryujm.sns.post.comment.domain;
+package com.ryujm.sns.post.domain;
 
 import java.time.LocalDateTime;
 
@@ -16,19 +16,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="`comment`")
-@Builder
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
-public class Comment {
+@NoArgsConstructor
+@Table(name="`member`")
+@Builder
+public class Member {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private int userId;
-	private int postId;
-	private String contents;
 	
 	@CreationTimestamp
 	private LocalDateTime createdAt;

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ryujm.sns.common.FileManager;
+import com.ryujm.sns.post.domain.Member;
 import com.ryujm.sns.post.domain.Post;
 import com.ryujm.sns.post.dto.CardView;
 import com.ryujm.sns.post.repository.PostRepository;
@@ -30,6 +31,7 @@ public class PostService {
 	
 	
 	public List<CardView> getPostList() {
+		
 		List<Post> postList = postRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 		
 		List <CardView> cardList = new ArrayList <>();
@@ -54,19 +56,13 @@ public class PostService {
 	
 	public boolean addPost(int userId
 				,String contents
-				, MultipartFile imageFile
-				, int memberId
-				, String location
-				, MultipartFile musicFile) {
+				, MultipartFile imageFile) {
 		String imagePath = FileManager.saveFile(userId, imageFile);
-		String musicPath = FileManager.saveFile(userId, musicFile);
 		
 		Post post = Post.builder()
 		.contents(contents)
 		.imagePath(imagePath)
 		.userId(userId)
-		.tagMemberId(memberId)
-		.musicPath(musicPath)
 		.build();
 		
 		try {
@@ -77,8 +73,8 @@ public class PostService {
 		}
 		
 		return true;
-		
 	}
+	
 	
 	
 }

@@ -29,6 +29,14 @@
 		WHERE
 			`loginId` = #{loginId}
 	</select>
+	
+	<select id="selectUserLoginId" resultType="com.ryujm.sns.user.domain.User">
+		SELECT
+			 `loginId`
+		FROM
+			`user`
+	</select>
+	
 	<select id="selectUser" parameterType="map"
 		resultType="com.ryujm.sns.user.domain.User">
 		SELECT

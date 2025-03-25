@@ -3,44 +3,78 @@
     xmlns:th="http://www.thymeleaf.org" 
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{layout/default}">
-        
-		<section layout:fragment="contents" class="d-flex justify-content-center align-items-center">
-			<div class="feed-view">
-				<top class="d-flex justify-content-between">
-					<span class="display-4 p-2">유저이름</span>
-					<button type="button" class="small btn btn-danger p-2 mx-4 my-4">삭제버튼 자리</button>
-				</top>
-				<hr class="hr-dotted">
-				<article class="bg-dark text-white">
-					<img class="w-100" src="">게시글 사진 표출 자리
-				</article>
-				<div class="ml-2">
-					<h2>wjdals2285</h2>
-					<div class="d-flex align-items-center">
-						<div class="like-zone">
-							<i class="bi bi-heart text-danger like-btn"id="likeBtn"></i>
+	<section layout:fragment="contents">
+		<button class="btn ml-2" id="createBtn"><b>새 게시글 작성</b></button>
+		<div th:each="card:${cardList}">
+			<div class="d-flex justify-content-center align-items-center my-4">
+				<div class="feed-view">
+					<top class="d-flex justify-content-between">
+						<span class="display-4 p-2" th:text="${card.loginId}">유저이름</span>
+						<button type="button" class="small btn btn-danger p-2 mx-4 my-4">삭제버튼 자리</button>
+					</top>
+					<hr class="hr-dotted">
+					<article class="bg-dark text-white">
+						<img class="w-100" th:src="${card.imagePath}">게시글 사진 표출 자리
+					</article>
+					<div class="ml-2">
+						<h2 th:text="${card.loginId}">wjdals2285</h2>
+						<div class="d-flex align-items-center">
+							<div class="like-zone">
+								<i class="bi bi-heart text-danger like-btn"id="likeBtn"></i>
+							</div>
 						</div>
+						<post-detail th:text="${card.contents}">게시글 문구공간</post-detail>
 					</div>
-					<post-detail>게시글 문구공간</post-detail>
+					<hr class="hr-dotted">
+					<comment>
+						<add-comment class="d-flex ml-2">
+							<input type="text" class="form-control mr-2" placeholder="댓글을 남겨보세요" th:id="|commentInput${card.postId}|">
+							<button type="button" class="btn btn-dark col-2 comment-btn" th:data-post-id="${card.postId}">댓글 남기기</button>
+						</add-comment>
+						<comment-list class="ml-2">
+							<last-comment>
+								<comment-user-name class="mr-1" >댓근남긴 유저의 아이디</comment-user-name>
+								<comment-detail class="mb-4">작성되있는 댓글 자리</comment-detail>
+							</last-comment>
+						</comment-list>
+					</comment>
 				</div>
-				<hr class="hr-dotted">
-				<comment>
-					<add-comment class="d-flex ml-2">
-						<input type="text" class="form-control mr-2" placeholder="댓글을 남겨보세요">
-						<button type="button" class="btn btn-dark col-2">댓글 남기기</button>
-					</add-comment>
-					<comment-list class="ml-2">
-						<last-comment>
-							<comment-user-name class="mr-1" >댓근남긴 유저의 아이디</comment-user-name>
-							<comment-detail>작성되있는 댓글 자리</comment-detail>
-						</last-comment>
-					</comment-list>
-				</comment>
-			</div>
+			</div>	
+		</div>
 	</section>
 		
 	<script layout:fragment="script">
 		$(function() {
+			
+			$("#createBtn").on("click", function() {
+				location.href=("/post/list-create");
+			});
+			
+			$(".comment-btn").on("click", function() {
+				let postId = $(this).data("post-id");
+				
+				// 이벤트가 발생한 버튼에 매칭된 input 태그 객체
+				// prev는 선택된 이벤트가 발생한 태그 바로 앞의 태그를 객체로 얻어오기 용이
+				// let contents = $(this).prev().val();
+				let contents = $("#commentInput" + postId).val();
+				
+				$.ajax({
+					type:"post"
+					, url:"/post/comment/create"
+					, data:{"postId":postId, "contents":contents}
+					, success:function(response) {
+						if(response.result == "success") {
+							location.reload();
+						} else {
+							alert("댓글쓰기 실패");
+						}
+					}
+					, error:function() {
+						alert("댓글쓰기 에러");
+					}
+				});
+				
+			});
 			
 			$(".like-btn").on("click", function() {
 					
@@ -63,11 +97,8 @@
 				});
 			});
 				
-			$("#uplaodBtn").on("click", function() {
-				
-			});
 			
-		})
+		});
 	</script>
         
 </html>

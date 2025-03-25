@@ -30,6 +30,6 @@ public class Like {
 	private int postId;
 	
 	@CreationTimestamp
-	private LocalDateTime updatedAt;
+	private LocalDateTime createdAt;
 	
 }

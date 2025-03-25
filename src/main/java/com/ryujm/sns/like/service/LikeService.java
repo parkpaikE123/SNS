@@ -5,13 +5,15 @@ import org.springframework.stereotype.Service;
 import com.ryujm.sns.like.domain.Like;
 import com.ryujm.sns.like.repository.LikeRepository;
 
+import jakarta.persistence.PersistenceException;
+
 @Service
 public class LikeService {
 
-	private final LikeRepository likeRepositroy;
+	private final LikeRepository likeRepository;
 	
 	public LikeService(LikeRepository likeRepository) {
-		this.likeRepositroy = likeRepository;
+		this.likeRepository = likeRepository;
 	}
 	
 	public boolean addLike(int postId, int userId) {
@@ -21,7 +23,13 @@ public class LikeService {
 		.userId(userId)
 		.build();
 		
+		try {			
+			likeRepository.save(like);
+		} catch(PersistenceException e) {
+			return false;
+		}
 		
+		return true;
 	}
 	
 }

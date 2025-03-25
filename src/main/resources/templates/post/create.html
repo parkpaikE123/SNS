@@ -7,11 +7,11 @@
         	<div class="create-page mb-4 mt-3">
         		<div class="top">
         			<div class="d-flex justify-content-center align-items-center mt-4">
-	        			<button type="button" class="mt-4"><i class="btn inputImage bi bi-file-earmark-image" id="imageInput"></i></button>
 	        			<div>
-		        			<input type="file" class="mt-4 btn form-control d-none" id="fileInput">
-		        			<br>
+	        				<i class="btn inputImage bi bi-file-earmark-image" id="imageInput"></i>
 		        			<span class="ml-2">사진을 첨부해주세요</span>
+		        			<input type="file" class="mt-4 form-control" id="fileInput">
+		        			<br>
 	        			</div>
         			</div>
         		</div>
@@ -19,19 +19,19 @@
         		<input type="text" class="no-border form-control" placeholder="문구 추가.." id="contentsInput">
         		<hr>
         		<div class="bottom">
-        			<button class="btn my-3 option-btn btn-light form-control">
+        			<button class="btn my-3 option-btn btn-light form-control" id="memberBtn">
         				<i class="bi bi-person-circle"></i>사람 태그
-        			</button> 
+        			</button>
         			<br>
-        			<button class="btn my-3 option-btn btn-light form-control">
+        			<button class="btn my-3 option-btn btn-light form-control" id="locationBtn">
         				<i class="bi bi-geo-alt"></i>위치 추가
         			</button> 
         			<br>
-        			<button class="btn my-3 option-btn btn-light form-control">
+        			<button class="btn my-3 option-btn btn-light form-control" id="musicBtn">
         				<i class="bi bi-music-note-beamed"></i>음악 추가
         			</button> 
         			<br>
-        			<button type="button" class="btn final-button form-control mb-2 text-dark">
+        			<button type="button" class="btn create-button form-control mb-2 text-dark">
         				<i class="bi bi-star text-dark mb-4"></i>게시하기
         			</button>
         		</div>
@@ -40,11 +40,45 @@
         
         <script layout:fragment="script">
         	$(function() {
-        		$(".final-button").on("click", function() {
+        		
+        		$(".create-button").on("click", function() {
         			
         			let contents = $("#contentsInput").val();
         			
-        			let file = $("fileInput")[0].files[0];
+        			let file = $("#fileInput")[0].files[0];
+        			
+        			if(contents == "") {
+        				alert("문구를 추가해주세요");
+        				return;
+        			}
+        			if(file == null) {
+        				alert("사진을 첨부해주세요");
+        				return;
+        			}
+        			
+        			let formData = new FormData();
+       				formData.append("contents", contents);
+       				formData.append("imageFile", file);
+        			
+        			
+        			$.ajax({
+        				type:"post"
+        				,url:"/post/create"
+        				,data:formData
+        				, enctype:"multipart/form-data" // 파일 업로드시 추가 옵션
+           				, processData:false // 파일 업로드시 추가 옵션
+           				, contentType:false // 파일 업로드시 추가 옵션
+        				,success:function(response) {
+        					if(response.result == "success") {
+        						location.href="/post/list-view";
+        					} else {
+        						alert("게시글 작성 실패");
+        					}
+        				}
+        				,error:function() {
+        					alert("게시글 작성 에러");
+        				}
+        			});
         			
         		});
         	})

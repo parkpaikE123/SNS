@@ -6,4 +6,6 @@ import com.ryujm.sns.post.comment.domain.Comment;
 
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
+	
+	
 }
