@@ -14,12 +14,13 @@
 					</top>
 					<hr class="hr-dotted">
 					<article class="bg-dark text-white">
-						<img class="w-100" th:src="${card.imagePath}">게시글 사진 표출 자리
+					<!-- th:src="${card.imagePath}" -->
+						<img class="w-100" alt="사진자리" src="123">게시글 사진 표출 자리
 					</article>
 					<div class="ml-2">
 						<h2 th:text="${card.loginId}">wjdals2285</h2>
 						<div class="d-flex align-items-center">
-							<div class="like-zone">
+							<div class="like-zone mb-2">
 								<i th:unless="${card.isLike}" class="bi bi-heart text-danger like-btn" th:data-post-id="${card.postId}"></i>
 								<i th:if="${card.isLike}" class="bi bi-heart-fill text-danger"></i>
 								<span>좋아요<span th:text="${card.likeCount}"></span>개</span>
@@ -35,8 +36,8 @@
 						</add-comment>
 						<comment-list class="ml-2">
 							<last-comment th:each="comment:${card.commentList}">
-								<comment-user-name class="mr-1" th:text="${comment.userId}">댓근남긴 유저의 아이디</comment-user-name>
-								<comment-detail class="mb-4" th:text="${comment.contents}">작성되있는 댓글 자리</comment-detail>
+								<div><b th:text="${comment.loginId}">댓근남긴 유저의 아이디</b></div>
+								<span class="mb-4" th:text="${comment.contents}">작성되있는 댓글 자리</span>
 							</last-comment>
 						</comment-list>
 					</comment>
@@ -59,6 +60,11 @@
 				// prev는 선택된 이벤트가 발생한 태그 바로 앞의 태그를 객체로 얻어오기 용이
 				// let contents = $(this).prev().val();
 				let contents = $("#commentInput" + postId).val();
+				
+				if(contents == "") {
+					alert("댓글 내용을 입력해주세요");
+					return;
+				}
 				
 				$.ajax({
 					type:"post"

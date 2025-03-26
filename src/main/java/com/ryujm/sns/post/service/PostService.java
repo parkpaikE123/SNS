@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ryujm.sns.common.FileManager;
 import com.ryujm.sns.like.service.LikeService;
-import com.ryujm.sns.post.comment.domain.Comment;
+import com.ryujm.sns.post.comment.dto.CommentView;
 import com.ryujm.sns.post.comment.service.CommentService;
 import com.ryujm.sns.post.domain.Post;
 import com.ryujm.sns.post.dto.CardView;
@@ -44,7 +44,7 @@ public class PostService {
 			
 			boolean isLike = likeService.isLikeByPostIdAndUserId(post.getId(), userId);
 			
-			List<Comment> commentList = commentService.getCommentList(post.getId());
+			List<CommentView> commentList = commentService.getCommentList(post.getId());
 			
 			CardView cardView = CardView.builder()
 			.postId(post.getId())

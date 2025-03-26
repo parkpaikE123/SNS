@@ -16,13 +16,12 @@
 
 .top {
 	width:1000px;
-	height:250px;
 }
 
 
 .bottom {
 	width:1000px;
-	height:250px;
+
 }
 
 header {
@@ -36,7 +35,7 @@ header > .headerIcon {
 }
 
 section {
-	height:600px;
+	
 }
 
 .join-box {
@@ -63,26 +62,24 @@ hr {
 }
 
 section > contents {
-	height:500px;
+
 }
 
 section > .feed-view {
-	width:1000px;
+	width:900px;
 	background-color:#2111;
 }
 
-article {
-	width:400px;
+.feed-view > article {
 	height:200px;
 }
 
 .like-zone {
-	height:50px;
+
 }
 
 comment-user-name {
 	font-size:20px;
-	font-weight:bold;
 }
 
 comment-detail {

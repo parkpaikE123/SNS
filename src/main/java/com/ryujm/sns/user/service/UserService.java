@@ -48,18 +48,15 @@ public class UserService {
 		
 	}
 	
-	public List<User> getAllUser() {
-		List<User> nameList = new ArrayList<>();
-		nameList.add(userRepository.selectUserLoginId());
-		
-		return nameList;
-	}
-	
 	public User getUser(String loginId, String password) {
 		
 		String encryptPassword = MD5HashingEncoder.encode(password);
 		
 		return userRepository.selectUser(loginId, encryptPassword);
+	}
+	
+	public User getUserName(int id) {
+		return userRepository.selectUserLoginId();
 	}
 	
 	public User getUserById(int id) {

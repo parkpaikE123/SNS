@@ -28,6 +28,8 @@ public class CommentRestController {
 		
 		int userId = (Integer)session.getAttribute("userId");
 		
+		String userName = (String)session.getAttribute("loginId");
+		
 		Map<String, String> resultMap = new HashMap<>();
 		if(commentService.addComment(postId, userId, contents)) {
 			resultMap.put("result", "success");
@@ -35,8 +37,7 @@ public class CommentRestController {
 			resultMap.put("result", "fail");
 		}
 		
-		return resultMap;
-		
+		return resultMap;	
 	}
 	
 }

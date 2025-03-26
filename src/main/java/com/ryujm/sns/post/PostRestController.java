@@ -47,12 +47,6 @@ public class PostRestController {
 		}
 		return resultMap;
 	}
-	
-	public List<User> addMember() {
-		List<User>nameList = new ArrayList<>();
-		nameList.addAll(userService.getAllUser());
-		return nameList;
-		
-	}
+
 
 }

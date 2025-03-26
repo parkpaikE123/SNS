@@ -11,4 +11,5 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 	// WHERE `postId` = #{}
 	public List<Comment> findByPostId(int postId);
 	
+	
 }

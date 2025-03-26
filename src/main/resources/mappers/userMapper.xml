@@ -35,6 +35,8 @@
 			 `loginId`
 		FROM
 			`user`
+		WHERE
+			`id` = #{id}
 	</select>
 	
 	<select id="selectUser" parameterType="map"
