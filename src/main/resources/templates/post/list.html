@@ -20,7 +20,9 @@
 						<h2 th:text="${card.loginId}">wjdals2285</h2>
 						<div class="d-flex align-items-center">
 							<div class="like-zone">
-								<i class="bi bi-heart text-danger like-btn"id="likeBtn"></i>
+								<i th:unless="${card.isLike}" class="bi bi-heart text-danger like-btn" th:data-post-id="${card.postId}"></i>
+								<i th:if="${card.isLike}" class="bi bi-heart-fill text-danger"></i>
+								<span>좋아요<span th:text="${card.likeCount}"></span>개</span>
 							</div>
 						</div>
 						<post-detail th:text="${card.contents}">게시글 문구공간</post-detail>
@@ -32,9 +34,9 @@
 							<button type="button" class="btn btn-dark col-2 comment-btn" th:data-post-id="${card.postId}">댓글 남기기</button>
 						</add-comment>
 						<comment-list class="ml-2">
-							<last-comment>
-								<comment-user-name class="mr-1" >댓근남긴 유저의 아이디</comment-user-name>
-								<comment-detail class="mb-4">작성되있는 댓글 자리</comment-detail>
+							<last-comment th:each="comment:${card.commentList}">
+								<comment-user-name class="mr-1" th:text="${comment.userId}">댓근남긴 유저의 아이디</comment-user-name>
+								<comment-detail class="mb-4" th:text="${comment.contents}">작성되있는 댓글 자리</comment-detail>
 							</last-comment>
 						</comment-list>
 					</comment>

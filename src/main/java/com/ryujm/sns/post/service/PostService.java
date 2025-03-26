@@ -9,6 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ryujm.sns.common.FileManager;
 import com.ryujm.sns.like.service.LikeService;
+import com.ryujm.sns.post.comment.domain.Comment;
+import com.ryujm.sns.post.comment.service.CommentService;
 import com.ryujm.sns.post.domain.Post;
 import com.ryujm.sns.post.dto.CardView;
 import com.ryujm.sns.post.repository.PostRepository;
@@ -16,23 +18,20 @@ import com.ryujm.sns.user.domain.User;
 import com.ryujm.sns.user.service.UserService;
 
 import jakarta.persistence.PersistenceException;
+import lombok.RequiredArgsConstructor;
+
+// lombok의 기능으로 생성자를 만드는 Autowired
+@RequiredArgsConstructor
 
 @Service
 public class PostService {
 	
 	private final PostRepository postRepository;
-	
 	private final UserService userService;
 	private final LikeService likeService;
+	private final CommentService commentService;
 	
-	public PostService(PostRepository postRepository, UserService userService, LikeService likeService) {
-		this.postRepository = postRepository;
-		this.userService = userService;
-		this.likeService = likeService;
-	}
-	
-	
-	public List<CardView> getPostList() {
+	public List<CardView> getPostList(int userId) {
 		
 		List<Post> postList = postRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 		
@@ -43,6 +42,10 @@ public class PostService {
 			
 			int likeCount = likeService.getLikeCount(post.getId());
 			
+			boolean isLike = likeService.isLikeByPostIdAndUserId(post.getId(), userId);
+			
+			List<Comment> commentList = commentService.getCommentList(post.getId());
+			
 			CardView cardView = CardView.builder()
 			.postId(post.getId())
 			.contents(post.getContents())
@@ -50,6 +53,8 @@ public class PostService {
 			.userId(post.getUserId())
 			.loginId(user.getLoginId())
 			.likeCount(likeCount)
+			.isLike(isLike)
+			.commentList(commentList)
 			.build();
 			
 			cardList.add(cardView);
