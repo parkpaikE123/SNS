@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ryujm.sns.post.dto.CardView;
 import com.ryujm.sns.post.service.PostService;
 
+import jakarta.servlet.http.HttpSession;
+
 @RequestMapping("/post")
 @Controller
 public class PostController {
@@ -26,9 +28,13 @@ public class PostController {
 	}
 	
 	@GetMapping("/list-view")
-	public String list(Model model) {
+	public String list(
+					Model model
+					, HttpSession session) {
 		
-		List<CardView> cardList = postService.getPostList();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		List<CardView> cardList = postService.getPostList(userId);
 		
 		model.addAttribute("cardList", cardList);
 		
