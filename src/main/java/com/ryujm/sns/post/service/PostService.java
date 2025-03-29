@@ -2,6 +2,7 @@ package com.ryujm.sns.post.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -83,6 +84,28 @@ public class PostService {
 		}
 		
 		return true;
+	}
+	
+	public boolean deletePost(int id) {
+		Optional<Post> optionalPost = postRepository.findById(id);
+		
+		if(optionalPost.isPresent()) {
+			
+			Post post = optionalPost.get();
+			FileManager.removeFile(post.getImagePath());
+			
+			try {
+				postRepository.delete(post);
+			} catch(PersistenceException e) {
+				
+			}
+			
+		} else {
+			return false;
+		}
+		
+		return true;
+		
 	}
 	
 	

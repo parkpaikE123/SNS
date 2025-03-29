@@ -1,10 +1,9 @@
 package com.ryujm.sns.post;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ryujm.sns.post.service.PostService;
-import com.ryujm.sns.user.domain.User;
 import com.ryujm.sns.user.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -46,6 +44,21 @@ public class PostRestController {
 			resultMap.put("result", "success");
 		}
 		return resultMap;
+	}
+	
+	@DeleteMapping("/delete")
+	public Map<String, String> deletePost(@RequestParam int id) {
+		
+		Map<String, String> resultMap = new HashMap<>();
+		
+		if(postService.deletePost(id)) {
+			resultMap.put("result", "success");
+		} else {
+			resultMap.put("result", "fail");
+		}
+		
+		return resultMap;
+		
 	}
 
 

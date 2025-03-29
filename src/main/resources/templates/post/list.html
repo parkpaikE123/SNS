@@ -8,46 +8,96 @@
 		<div th:each="card:${cardList}">
 			<div class="d-flex justify-content-center align-items-center my-4">
 				<div class="feed-view">
-					<top class="d-flex justify-content-between">
-						<span class="display-4 p-2" th:text="${card.loginId}">유저이름</span>
-						<button type="button" class="small btn btn-danger p-2 mx-4 my-4">삭제버튼 자리</button>
-					</top>
-					<hr class="hr-dotted">
-					<article class="bg-dark text-white">
-					<!-- th:src="${card.imagePath}" -->
-						<img class="w-100" alt="사진자리" src="123">게시글 사진 표출 자리
-					</article>
-					<div class="ml-2">
-						<h2 th:text="${card.loginId}">wjdals2285</h2>
-						<div class="d-flex align-items-center">
-							<div class="like-zone mb-2">
-								<i th:unless="${card.isLike}" class="bi bi-heart text-danger like-btn" th:data-post-id="${card.postId}"></i>
-								<i th:if="${card.isLike}" class="bi bi-heart-fill text-danger"></i>
-								<span>좋아요<span th:text="${card.likeCount}"></span>개</span>
+					<div th:data-id="${card.id}" id="post">
+						<top class="d-flex justify-content-between" th:data-id="${card.id}">
+							<span class="display-4 p-2" th:text="${card.loginId}">유저이름</span>
+							<button type="button" class="small btn btn-danger p-2 mx-4 my-4" id="deleteBtn" >삭제버튼 자리</button>
+						</top>
+						<hr class="hr-dotted">
+						<article class="bg-dark text-white">
+						<!-- th:src="${card.imagePath}" -->
+							<img class="w-100" alt="사진자리" src="123">게시글 사진 표출 자리
+						</article>
+						<div class="ml-2">
+							<h2 th:text="${card.loginId}">wjdals2285</h2>
+							<div class="d-flex align-items-center">
+								<div class="like-zone mb-2">
+									<i th:unless="${card.isLike}" class="bi bi-heart text-danger like-btn" th:data-post-id="${card.postId}"></i>
+									<i th:if="${card.isLike}" class="bi bi-heart-fill text-danger"></i>
+									<span>좋아요<span th:text="${card.likeCount}"></span>개</span>
+								</div>
 							</div>
+							<post-detail th:text="${card.contents}">게시글 문구공간</post-detail>
 						</div>
-						<post-detail th:text="${card.contents}">게시글 문구공간</post-detail>
+						<hr class="hr-dotted">
+						<comment>
+							<add-comment class="d-flex ml-2">
+								<input type="text" class="form-control mr-2" placeholder="댓글을 남겨보세요" th:id="|commentInput${card.postId}|">
+								<button type="button" class="btn btn-dark col-2 comment-btn" th:data-post-id="${card.postId}">댓글 남기기</button>
+							</add-comment>
+							<comment-list class="ml-2">
+								<last-comment th:each="comment:${card.commentList}">
+									<div><b th:text="${comment.loginId}">댓근남긴 유저의 아이디</b></div>
+									<span class="mb-4" th:text="${comment.contents}">작성되있는 댓글 자리</span>
+								</last-comment>
+							</comment-list>
+						</comment>
 					</div>
-					<hr class="hr-dotted">
-					<comment>
-						<add-comment class="d-flex ml-2">
-							<input type="text" class="form-control mr-2" placeholder="댓글을 남겨보세요" th:id="|commentInput${card.postId}|">
-							<button type="button" class="btn btn-dark col-2 comment-btn" th:data-post-id="${card.postId}">댓글 남기기</button>
-						</add-comment>
-						<comment-list class="ml-2">
-							<last-comment th:each="comment:${card.commentList}">
-								<div><b th:text="${comment.loginId}">댓근남긴 유저의 아이디</b></div>
-								<span class="mb-4" th:text="${comment.contents}">작성되있는 댓글 자리</span>
-							</last-comment>
-						</comment-list>
-					</comment>
 				</div>
 			</div>	
 		</div>
+		
+			<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#moreModal">
+		  Launch demo modal
+		</button>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="moreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        ...
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+			
 	</section>
 		
 	<script layout:fragment="script">
 		$(function() {
+			
+			$("#deleteBtn").on("click", function() {
+				let id = $("post").data("id").val();
+				
+				$.ajax ({
+					type:"delete"
+        				, url:"/post/delete"
+        				, data:{"id":id}
+        				,success:function(response) {
+        					if(response.result == "success") {
+        						location.href = "/post/list-view";
+        					}else {
+        						alert("삭제실패");
+        					}
+        				}
+        				, error:function() {
+        					alert("삭제 에러!");
+        				}
+				});
+				
+			});
 			
 			$("#createBtn").on("click", function() {
 				location.href=("/post/list-create");
