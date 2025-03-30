@@ -20,7 +20,8 @@ public interface LikeRepository extends JpaRepository<Like, Integer>{
 	// SELECT * FROM `like` WHERE `postId` = #{}
 	// DELETE FROM `like` WHERE `postId` = #{}
 	// transaction
-	// 
+	// Rollback : 이전 상태로 되돌린다.
+	// 삭제 과정에 문제가 생기는 경우 진행된 모든 과정을 되돌린다
 	@Transactional
 	public void deleteByPostId(int postId);
 	
