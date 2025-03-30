@@ -86,18 +86,30 @@ public class PostService {
 		return true;
 	}
 	
-	public boolean deletePost(int id) {
+	public boolean deletePost(int id, int userId) {
 		Optional<Post> optionalPost = postRepository.findById(id);
 		
 		if(optionalPost.isPresent()) {
 			
 			Post post = optionalPost.get();
+			
+			// 삭제 대상 게시글 정보의 작성자와 로그인한 사용자가 일치하지 않는 경우
+			// 삭제 실패
+			if(post.getUserId() != userId) {
+				return false;
+			}
+			
 			FileManager.removeFile(post.getImagePath());
+			
+			likeService.deleteLikeByPostId(post.getId());
+			commentService.deleteCommentByPostId(post.getId());
+			
+			
 			
 			try {
 				postRepository.delete(post);
 			} catch(PersistenceException e) {
-				
+				return false;
 			}
 			
 		} else {

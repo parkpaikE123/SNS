@@ -11,6 +11,7 @@
 					<div th:data-id="${card.id}" id="post">
 						<top class="d-flex justify-content-between" th:data-id="${card.id}">
 							<span class="display-4 p-2" th:text="${card.loginId}">유저이름</span>
+							<i th:if="${card.userId == session.userId}" class="bi bi-three-dots-vertical more-btn" th:data-post-id="${card.postId}" data-toggle="modal" data-target="#moreModal" th:data-post-id="${card.postId}"></i>
 							<button type="button" class="small btn btn-danger p-2 mx-4 my-4" id="deleteBtn" >삭제버튼 자리</button>
 						</top>
 						<hr class="hr-dotted">
@@ -23,7 +24,7 @@
 							<div class="d-flex align-items-center">
 								<div class="like-zone mb-2">
 									<i th:unless="${card.isLike}" class="bi bi-heart text-danger like-btn" th:data-post-id="${card.postId}"></i>
-									<i th:if="${card.isLike}" class="bi bi-heart-fill text-danger"></i>
+									<i th:if="${card.isLike}" class="bi bi-heart-fill text-danger unlike-btn" th:data-post-id="${card.postId}"></i>
 									<span>좋아요<span th:text="${card.likeCount}"></span>개</span>
 								</div>
 							</div>
@@ -56,19 +57,11 @@
 		<div class="modal fade" id="moreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		  <div class="modal-dialog modal-dialog-centered" role="document">
 		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
+		    
+		      <div class="modal-body text-center">
+		        <a href="#" id="deleteBtn">삭제하기</a>
 		      </div>
-		      <div class="modal-body">
-		        ...
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save changes</button>
-		      </div>
+		      
 		    </div>
 		  </div>
 		</div>
@@ -78,8 +71,17 @@
 	<script layout:fragment="script">
 		$(function() {
 			
+			$("#more-btn").on("click", function() {
+				// deleteBtn의 data-post-id값을 
+				// 해당 이벤트가 발생한 아이콘의 게시글 postId가 저장되도록한다.
+				let postId = $(this).data("post-id");
+				
+				$("#deleteBtn").data("post-id", postId);
+				
+			});
+			
 			$("#deleteBtn").on("click", function() {
-				let id = $("post").data("id").val();
+				let id = $(this).data("post-id");
 				
 				$.ajax ({
 					type:"delete"
@@ -87,7 +89,7 @@
         				, data:{"id":id}
         				,success:function(response) {
         					if(response.result == "success") {
-        						location.href = "/post/list-view";
+        						location.reload();
         					}else {
         						alert("삭제실패");
         					}
@@ -96,6 +98,7 @@
         					alert("삭제 에러!");
         				}
 				});
+				
 				
 			});
 			
@@ -132,6 +135,26 @@
 					}
 				});
 				
+			});
+			
+			$(".unlike-btn").on("click", function() {
+				let postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"delete"
+					, url:"/post/unlike"
+					, data:{"postId":postId}
+					, success:function(response){
+						if(response.result == "success") {
+							location.reload();
+						} else {
+							alert("좋아요 취소 실패");
+						}
+					}
+					, error:function() {
+						alert("좋아요 취소 에러!");
+					}
+				});
 			});
 			
 			$(".like-btn").on("click", function() {
